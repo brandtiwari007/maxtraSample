@@ -1,42 +1,65 @@
 import axios from 'axios';
 const baseUrl =
   'http://182.76.237.238/~teammaxtra/help_application/public/api/login';
-import React, { useState} from 'react';
+import React, {useEffect, useState} from 'react';
+import DashboardData from './Dashboard';
 import {
+  SafeAreaView,
+  ScrollView,
+  StatusBar,
   StyleSheet,
   Text,
+  useColorScheme,
   TextInput,
   View,
+  Dimensions,
   Button,
 } from 'react-native';
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
 const Login = ({navigation}) => {
-  const [userName, setUserName] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setErrrData] = useState('');
-  const handleLogin = async () => {
+      const[userName,setUserName]=useState('');
+      const[password,setPassword]=useState('');
+      const[error,setErrrData] =useState('')
+  const handleLogin = async() => {
     setErrrData('');
-    console.log('datatat of form>>', userName, password);
+      console.log("datatat of form>>",userName,password)
+           
+      let data={
+    email :  userName,
+    password : password,   
+     user_type : 1
+      }
+      try{
+   const res=await axios.post(`${baseUrl}`,data)
+   console.log("res>>>",res.data);
+   if(res.data.status){
+         setErrrData('');
+        
+         navigation.navigate('DashboardData')
 
-    let data = {
-      email: userName,
-      password: password,
-      user_type: 1,
-    };
-    const res = await axios.post(`${baseUrl}`, data);
-    console.log('res>>>', res.data);
-    if (res.data.status) {
-      setErrrData('');
+     }else{
+       setErrrData(res.data.message)
 
-      navigation.navigate('DashboardData');
-    } else {
-      setErrrData(res.data.message);
+     }
+    }catch(err){
+        console.log("errorororor>>>",err);
+        console.warn("getting error in fetching data",err)
     }
+    
+
+    // navigation.navigate('DashboardData')
+    
+      
 
   };
 
+  
+
+
   return (
     <View style={{marginTop: 100}}>
-      <Text style={{marginLeft: 20, color: 'black'}}>usernname</Text>
+      <Text style={{marginLeft: 20,color:"black"}}>usernname</Text>
       <TextInput
         style={styles.input}
         placeholder="enter your email"
@@ -44,22 +67,25 @@ const Login = ({navigation}) => {
         placeholderTextColor="black"
         autoCapitalize="none"
         onChangeText={data => setUserName(data)}
+        
       />
-      <Text style={{marginLeft: 20, color: 'black'}}>Password</Text>
+      <Text style={{marginLeft: 20,color:"black"}}>Password</Text>
       <TextInput
         style={styles.input}
         placeholder="enter your password"
         underlineColorAndroid="transparent"
-        secureTextEntry={true}
+        secureTextEntry={true} 
         placeholderTextColor="black"
         autoCapitalize="none"
         onChangeText={data => setPassword(data)}
+
+
       />
-      <View style={{marginTop: '5%'}}>
-        <Text>{error}</Text>
-        <Button title="Login" onPress={handleLogin}>
-          login
-        </Button>
+      <View style={{marginTop:'5%'}}>
+            <Text>{error}</Text>
+      <Button title="Login" onPress={handleLogin}>
+        login
+      </Button>
       </View>
     </View>
   );
