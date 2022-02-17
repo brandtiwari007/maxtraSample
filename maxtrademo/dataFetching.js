@@ -22,6 +22,7 @@ const Login = ({navigation}) => {
       const[password,setPassword]=useState('');
       const[error,setErrrData] =useState('')
   const handleLogin = async() => {
+
     setErrrData('');
       console.log("datatat of form>>",userName,password)
            

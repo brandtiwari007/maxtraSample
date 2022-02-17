@@ -22,33 +22,33 @@ const DashboardData = () => {
   const renderItem = ({item}) => {
     console.log('calleddddddd');
     console.log('item<<<<<', item);
-    let img = [];
+    // let img = [];
     console.log('item<<in images<<<', item.images);
 
-    if (item.images) {
-      console.log('item.imindiiiiages>>', item.images);
+    // if (item.images) {
+      // console.log('item.imindiiiiages>>', item.images);
 
-      img = item.images.map((item1, index) => {
-        console.log('itemnjbjbbi.images>>', item1.image);
-        // return <Image key="uniqueId1" style={{ width: '20%', height: '40%', alignSelf: 'center',borderRadius:30,borderColor:"green",borderWidth:2 }}  source={{ uri: item1.image }}></Image>
-        return (
-          <Image
-            key={index}
-            style={{
-              marginLeft: '50%',
-              marginTop: '-20%',
-              width: '25%',
-              height: '40%',
-              alignSelf: 'center',
-              borderRadius: 2,
-              borderColor: 'green',
-              borderWidth: 2,
-            }}
-            source={{uri: item1.image}}
-          />
-        );
-      });
-    }
+      // img = item.images.map((item1, index) => {
+      //   console.log('itemnjbjbbi.images>>', item1.image);
+      //   // return <Image key="uniqueId1" style={{ width: '20%', height: '40%', alignSelf: 'center',borderRadius:30,borderColor:"green",borderWidth:2 }}  source={{ uri: item1.image }}></Image>
+      //   return (
+      //     <Image
+      //       key={index}
+      //       style={{
+      //         marginLeft: '50%',
+      //         marginTop: '-20%',
+      //         width: '25%',
+      //         height: '40%',
+      //         alignSelf: 'center',
+      //         borderRadius: 2,
+      //         borderColor: 'green',
+      //         borderWidth: 2,
+      //       }}
+      //       source={{uri: item1.image}}
+      //     />
+      //   );
+      // });
+    // }
 
     return (
       <View>
@@ -58,14 +58,14 @@ const DashboardData = () => {
             borderBottomColor: 'black',
             borderBottomWidth: 1,
           }}>
-          <Text>{`Company- ${item.drug_company_name}`}</Text>
-          <Text>{`drug name- ${item.drug_name}`}</Text>
-          <Text> {`expiry date- ${item.expiry_date}`}</Text>
-          <Text>{`mfg- ${item.manufacturing_date}`}</Text>
-          <Text>{`MRP- ${item.price_per_piece}`}</Text>
-          <Text>{`notes- ${item.notes}`}</Text>
-          {/* <Image style={{marginLeft:'50%', marginTop:'-10%',width: '20%', height: '40%', alignSelf: 'center',borderRadius:30,borderColor:"green",borderWidth:2 }}  source={{ uri: item.images[0].image }}></Image> */}
-          {img}
+          <Text>{`Company- ${item?.drug_company_name}`}</Text>
+          <Text>{`drug name- ${item?.drug_name}`}</Text>
+          <Text> {`expiry date- ${item?.expiry_date}`}</Text>
+          <Text>{`mfg- ${item?.manufacturing_date}`}</Text>
+          <Text>{`MRP- ${item?.price_per_piece}`}</Text>
+          <Text>{`notes- ${item?.notes}`}</Text>
+          <Image style={{marginLeft:'50%', marginTop:'-20%',width: '20%', height: '40%', alignSelf: 'center',borderRadius:10,borderColor:"green",borderWidth:2 }}  source={{ uri: item?.images?.image }}></Image>
+          {/* {img} */}
         </View>
       </View>
     );
